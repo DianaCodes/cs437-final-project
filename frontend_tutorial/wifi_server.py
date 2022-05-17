@@ -47,14 +47,15 @@ def stop():
 
 ########################################################
 # Wifi
-HOST = "10.0.0.10" # IP address of your Raspberry PI
-PORT = 65482          # Port to listen on (non-privileged ports are > 1023)
+HOST = "10.0.0.9" # IP address of your Raspberry PI
+PORT = 65483          # Port to listen on (non-privileged ports are > 1023)
 direction = "None"
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
 
     try:
+        print('listening')
         while 1:
             client, clientInfo = s.accept()
             print("server recv from: ", clientInfo)
@@ -101,7 +102,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     client.sendall(lis) # Echo back to client
                 else:
                     # audio
+                    print(data)
                     print()
+                    print(data.data)
+                    blob = data.data
+                    with open('file.wav', 'ab') as f:
+                        f.write(blob)
     except: 
         print("Closing socket")
         client.close()
