@@ -99,6 +99,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     print(stats)
                     lis = stats.encode()
                     client.sendall(lis) # Echo back to client
+                else:
+                    # audio
+                    print()
     except: 
         print("Closing socket")
         client.close()
